@@ -72,10 +72,10 @@ namespace TestAutomationFrameworkMentoring.TestFeatures
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Verify flights page and search results")]
-        [NUnit.Framework.TestCaseAttribute("Puk", null)]
-        [NUnit.Framework.TestCaseAttribute("Sto", null)]
-        [NUnit.Framework.TestCaseAttribute("Asi", null)]
-        public virtual void VerifyFlightsPageAndSearchResults(string fromCity, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("Elfas", "Sel", "2019-03-01", null)]
+        [NUnit.Framework.TestCaseAttribute("Sto", "Bir", "2019-04-10", null)]
+        [NUnit.Framework.TestCaseAttribute("Asi", "Tra", "2019-07-30", null)]
+        public virtual void VerifyFlightsPageAndSearchResults(string fromCity, string toCity, string date, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify flights page and search results", null, exampleTags);
 #line 5
@@ -87,6 +87,18 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("I click on flights tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 8
  testRunner.And(string.Format("I enter {0} value", fromCity), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 9
+ testRunner.And(string.Format("I enter location {0}", toCity), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 10
+ testRunner.And(string.Format("I enter {0} of departure", date), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 11
+ testRunner.And("I set passenger numbers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 12
+ testRunner.And("I confirm my choice", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 13
+ testRunner.And("I click search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 14
+ testRunner.Then("I see results of my search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

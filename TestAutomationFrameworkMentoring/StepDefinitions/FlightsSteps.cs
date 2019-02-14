@@ -37,6 +37,47 @@ namespace TestAutomationFrameworkMentoring.StepDefinitions
             flightsPage.SetFromCity(fromCity);
         }
 
+        [When(@"I enter location (.*)")]
+        public void WhenIEnterLocationSel(string toCity)
+        {
+            var flightsPage = new FlightsPage(this.driverContext);
+            flightsPage.SetToCity(toCity);
+        }
+
+        [When(@"I enter (.*) of departure")]
+        public void WhenIEnterOfDeparture(string date)
+        {
+            var flightsPage = new FlightsPage(this.driverContext);
+            flightsPage.EnterDepartDate(date);
+        }
+
+        [When(@"I set passenger numbers")]
+        public void WhenISetPassengerNumbers()
+        {
+            var flightsPage = new FlightsPage(this.driverContext);
+            flightsPage.SetTotalNumberOfPassengers();
+        }
+
+        [When(@"I confirm my choice")]
+        public void WhenIConfirmMyChoice()
+        {
+            var flightsPage = new FlightsPage(this.driverContext);
+            flightsPage.ConfirmPassengerNumbers();
+        }
+
+        [When(@"I click search button")]
+        public void WhenIClickSearchButton()
+        {
+            var flightsPage = new FlightsPage(this.driverContext);
+            flightsPage.ClickSearchBtnForFlights();
+        }
+        [Then(@"I see results of my search")]
+        public void ThenISeeResultsOfMySearch()
+        {
+            var flightsPage = new FlightsPage(this.driverContext);
+        }
+
+
 
     }
 }
