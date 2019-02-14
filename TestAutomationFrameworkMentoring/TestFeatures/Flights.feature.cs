@@ -1,0 +1,1 @@
+﻿#error (5:1): Scenario Outline 'Verify hotels page and search results' has no examples defined
