@@ -60,18 +60,11 @@ namespace TestAutomationFrameworkMentoring.StepDefinitions
             homePage.ClickOnSearchBtn();
         }
 
-        [Then(@"I can see results of my search")]
-        public void ThenICanSeeResultsOfMySearch()
+        [Then(@"I can see at least one result of my search")]
+        public void ThenICanSeeAtLeastOneResultOfMySearch()
         {
             var homePage = new HotelsPage(this.driverContext);
             homePage.CheckResultTable();
         }
-
-
-
-
-
-
-
     }
 }

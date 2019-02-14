@@ -23,12 +23,20 @@ namespace TestAutomationFrameworkMentoring.StepDefinitions
             this.scenarioContext = scenarioContext;
             this.driverContext = this.scenarioContext.Get<DriverContext>("DriverContext");
         }
-
-        [Given(@"I click on flights tab")]
+        [When(@"I click on flights tab")]
         public void WhenIClickOnFlightsTab()
         {
-            var flightPage = new FlightsPage(this.driverContext);
-            flightPage.ClickOnFlightsBtn();
+            var flightsPage = new FlightsPage(this.driverContext);
+            flightsPage.ClickOnFlightsBtn();
         }
+
+        [When(@"I enter (.*) value")]
+        public void WhenIEnterValue(string fromCity)
+        {
+            var flightsPage = new FlightsPage(this.driverContext);
+            flightsPage.SetFromCity(fromCity);
+        }
+
+
     }
 }

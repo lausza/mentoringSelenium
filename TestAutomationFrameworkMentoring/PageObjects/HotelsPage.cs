@@ -21,7 +21,7 @@ namespace TestAutomationFrameworkMentoring.PageObjects
             travellersField = new ElementLocator(Locator.Id, "travellersInput"),
             childBtn = new ElementLocator(Locator.Id, "childPlusBtn"),
             adultsMinBtn = new ElementLocator(Locator.Id, "adultMinusBtn"),
-            table = new ElementLocator(Locator.XPath, "//table[@class=\"bgwhite table table-striped\"]");
+            firtValueFromtable = new ElementLocator(Locator.CssSelector, "div#body-section tr:nth-child(1) > td > div.col-md-6.col-xs-4.go-right > div > h4 > a > b");
 
         public HotelsPage(DriverContext driverContext)
         {
@@ -62,7 +62,7 @@ namespace TestAutomationFrameworkMentoring.PageObjects
 
         public void CheckResultTable()
         {
-            var result = this.driverContext.Driver.GetElement(table).Displayed;
+            var result = this.driverContext.Driver.GetElement(firtValueFromtable).Displayed;
             Assert.AreEqual(true, result);
         }
     }

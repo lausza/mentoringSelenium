@@ -9,7 +9,7 @@ Scenario Outline: Verify hotels page and search results
 	And I choose date for <checkinDate> and <checkoutDate>
 	And I add child to travellers
 	And I click on search button
-	Then I can see results of my search
+	Then I can see at least one result of my search
 
 Examples:
 | cityname | checkinDate | checkoutDate |
