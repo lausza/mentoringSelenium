@@ -34,7 +34,13 @@ namespace Objectivity.Test.Automation.Tests.Features.StepDefinitions
         [Given(@"Default page is opened")]
         public void GivenDefaultPageIsOpened()
         {
-            new HomePage(this.driverContext).OpenHomePage();
+            this.homePage.OpenHomePage();
+        }
+
+        [Then(@"Flights search control is displayed on home page")]
+        public void CheckIfFlightSearchIsDisplayed()
+        {
+            this.homePage.CheckFlightSearchVisability();
         }
     }
 }

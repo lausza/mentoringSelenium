@@ -1,18 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Objectivity.Test.Automation.Common;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
+using TestAutomationFrameworkMentoring.Helpers;
 using TestAutomationFrameworkMentoring.PageObjects;
 
 namespace TestAutomationFrameworkMentoring.StepDefinitions
+
 {
     [Binding]
     public sealed class FlightsSteps
     {
         private readonly DriverContext driverContext;
         private readonly ScenarioContext scenarioContext;
+        private FlightsPage page;
 
         public FlightsSteps(ScenarioContext scenarioContext)
         {
@@ -22,26 +23,26 @@ namespace TestAutomationFrameworkMentoring.StepDefinitions
             }
             this.scenarioContext = scenarioContext;
             this.driverContext = this.scenarioContext.Get<DriverContext>("DriverContext");
+            this.page = new FlightsPage(driverContext);
         }
+
         [When(@"I click on flights tab")]
+        [When(@"I click on flights tab on home page")]
         public void WhenIClickOnFlightsTab()
         {
-            var flightsPage = new FlightsPage(this.driverContext);
-            flightsPage.ClickOnFlightsBtn();
+           this.page.ClickOnFlightsBtn();
         }
 
         [When(@"I enter (.*) value")]
         public void WhenIEnterValue(string fromCity)
         {
-            var flightsPage = new FlightsPage(this.driverContext);
-            flightsPage.SetFromCity(fromCity);
+            this.page.SetFromCity(fromCity);
         }
 
         [When(@"I enter location (.*)")]
         public void WhenIEnterLocationSel(string toCity)
         {
-            var flightsPage = new FlightsPage(this.driverContext);
-            flightsPage.SetToCity(toCity);
+            this.page.SetToCity(toCity);
         }
 
         [When(@"I enter (.*) of departure")]
@@ -71,13 +72,30 @@ namespace TestAutomationFrameworkMentoring.StepDefinitions
             var flightsPage = new FlightsPage(this.driverContext);
             flightsPage.ClickSearchBtnForFlights();
         }
+
+        [When(@"I enter flight search parameters on home page")]
+        public void SetFlightReservationDetails(Table table)
+        {
+            var flightReservationDetails = table.CreateInstance<FlightSearchParameters>();
+            this.page.SetFromCity(flightReservationDetails.OriginCity);
+            this.page.SetToCity(flightReservationDetails.DestinationCity);
+            this.page.EnterDepartDate(flightReservationDetails.DepartureDate);
+
+            if (flightReservationDetails.IsRoundTrip)
+            {
+                this.page.SetOneWayOrRoundTrip(flightReservationDetails.IsRoundTrip);
+                //this.page.EnterReturnDate(flightReservationDetails.ReturnDate);
+            }
+            else
+            {
+                this.page.SetOneWayOrRoundTrip(flightReservationDetails.IsRoundTrip);
+            }
+        }
+
         [Then(@"I see results of my search")]
         public void ThenISeeResultsOfMySearch()
         {
             var flightsPage = new FlightsPage(this.driverContext);
         }
-
-
-
     }
 }

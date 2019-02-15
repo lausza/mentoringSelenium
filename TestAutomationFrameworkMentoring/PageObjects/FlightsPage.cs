@@ -1,110 +1,115 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Objectivity.Test.Automation.Common;
 using Objectivity.Test.Automation.Common.Extensions;
 using Objectivity.Test.Automation.Common.Types;
+using Objectivity.Test.Automation.Tests.PageObjects;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
 namespace TestAutomationFrameworkMentoring.PageObjects
 {
-    public class FlightsPage
+    public class FlightsPage : ProjectPageBase
     {
-        private readonly DriverContext driverContext;
+        private readonly ElementLocator fromField = new ElementLocator(Locator.Id, "s2id_location_from");
+        private readonly ElementLocator cityFromName = new ElementLocator(Locator.CssSelector, "div#select2-drop input");
+        private readonly ElementLocator firstFromCity = new ElementLocator(Locator.XPath,
+            "//li[@class=\"select2-results-dept-0 select2-result select2-result-selectable select2-highlighted\"]");   // simplify 
 
-        private readonly ElementLocator
-            fromField = new ElementLocator(Locator.Id, "s2id_location_from"),
-            cityFromName = new ElementLocator(Locator.CssSelector, "div#select2-drop input"),
-            firstFromCity = new ElementLocator(Locator.XPath,
-                "//li[@class=\"select2-results-dept-0 select2-result select2-result-selectable select2-highlighted\"]"),
-            toField = new ElementLocator(Locator.Id, "s2id_location_to"),
-            cityToName = new ElementLocator(Locator.CssSelector, "div#select2-drop input"),
-            firstToCity = new ElementLocator(Locator.XPath,
-                "//li[@class=\"select2-results-dept-0 select2-result select2-result-selectable select2-highlighted\"]"),
-            departDate = new ElementLocator(Locator.Name, "departure"),
-            passengersField = new ElementLocator(Locator.Name, "totalManualPassenger"),
-            adultsField = new ElementLocator(Locator.XPath, "//select[@name=\"madult\"]"),
-            childField = new ElementLocator(Locator.XPath, "//select[@name=\"mchildren\"]"),
-            minfantField = new ElementLocator(Locator.XPath, "//select[@name=\"minfant\"]"),
-            doneBtn = new ElementLocator(Locator.Id, "sumManualPassenger"),
-            searchBtn = new ElementLocator(Locator.CssSelector,
-                "form[name=\"flightmanualSearch\"] button[type=\"submit\"]"),
-            results = new ElementLocator(Locator.CssSelector, "table#load_data tr:nth-child(1) > td");
+        private readonly ElementLocator toField = new ElementLocator(Locator.Id, "s2id_location_to");
+        private readonly ElementLocator cityToName = new ElementLocator(Locator.CssSelector, "div#select2-drop input");
+
+        private readonly ElementLocator firstToCity = new ElementLocator(Locator.XPath,
+            "//li[@class=\"select2-results-dept-0 select2-result select2-result-selectable select2-highlighted\"]");// simplify 
+
+        private readonly ElementLocator departDate = new ElementLocator(Locator.Name, "departure");
+        private readonly ElementLocator passengersField = new ElementLocator(Locator.Name, "totalManualPassenger");
+        private readonly ElementLocator adultsField = new ElementLocator(Locator.XPath, "//select[@name=\"madult\"]");
+        private readonly ElementLocator childField = new ElementLocator(Locator.XPath, "//select[@name=\"mchildren\"]");
+        private readonly ElementLocator minfantField = new ElementLocator(Locator.XPath, "//select[@name=\"minfant\"]");
+        private readonly ElementLocator doneBtn = new ElementLocator(Locator.Id, "sumManualPassenger");
+
+        private readonly ElementLocator searchBtn = new ElementLocator(Locator.CssSelector, "form[@name='flightmanualSearch'] button[@type='submit']");
+        private readonly ElementLocator results = new ElementLocator(Locator.CssSelector, "table#load_data tr:nth-child(1) > td");
+
+        private readonly ElementLocator flightsBtn = new ElementLocator(Locator.XPath, "//a[@title='flights']");
+        private readonly ElementLocator roundTripRadiobutton = new ElementLocator(Locator.XPath, "//input[@value='round']/following::ins");
+        private readonly ElementLocator oneWayRadiobutton = new ElementLocator(Locator.XPath, "//input[@value='oneway']/following::ins");
 
 
-
-
-
-
-        public FlightsPage(DriverContext driverContext)
+        public FlightsPage(DriverContext driverContext) : base(driverContext)
         {
-            this.driverContext = driverContext;
         }
 
-        private readonly ElementLocator
-            flightsBtn = new ElementLocator(Locator.XPath, "//a[@title=\"Flights\"]");
 
         public void ClickOnFlightsBtn()
         {
-            this.driverContext.Driver.GetElement(flightsBtn).Click();
+            this.Driver.GetElement(flightsBtn).Click();
         }
 
         public void SetFromCity(string fromCity)
         {
-            this.driverContext.Driver.GetElement(fromField).Click();
-            this.driverContext.Driver.GetElement(cityFromName).SendKeys(fromCity);
-            this.driverContext.Driver.GetElement(firstFromCity).Click();
+            this.Driver.GetElement(fromField).Click();
+            this.Driver.GetElement(cityFromName).SendKeys(fromCity);
+            this.Driver.GetElement(firstFromCity).Click();
         }
 
         public void SetToCity(string toCity)
         {
-            this.driverContext.Driver.GetElement(toField).Click();
-            this.driverContext.Driver.GetElement(cityToName).SendKeys(toCity);
-            this.driverContext.Driver.GetElement(firstToCity).Click();
+            this.Driver.GetElement(toField).Click();
+            this.Driver.GetElement(cityToName).SendKeys(toCity);
+            this.Driver.GetElement(firstToCity).Click();
         }
 
         public void EnterDepartDate(string date)
         {
-            this.driverContext.Driver.GetElement(departDate).SendKeys(date);
-            this.driverContext.Driver.GetElement(departDate).Click();
+            this.Driver.GetElement(departDate).SendKeys(date);
+            this.Driver.GetElement(departDate).Click();
         }
 
         public void SetTotalNumberOfPassengers()
         {
-            this.driverContext.Driver.GetElement(passengersField).Click();
+            this.Driver.GetElement(passengersField).Click();
 
-            IWebElement adultDropDown = driverContext.Driver.GetElement(adultsField);
+            IWebElement adultDropDown = this.Driver.GetElement(adultsField);
             SelectElement selectAdultNb = new SelectElement(adultDropDown);
             selectAdultNb.SelectByIndex(1);
 
-            IWebElement childDropDown = driverContext.Driver.GetElement(childField);
+            IWebElement childDropDown = this.Driver.GetElement(childField);
             SelectElement childAdultNb = new SelectElement(childDropDown);
             childAdultNb.SelectByIndex(2);
 
-            IWebElement minfantDropDown = driverContext.Driver.GetElement(minfantField);
+            IWebElement minfantDropDown = this.Driver.GetElement(minfantField);
             SelectElement minfantAdultNb = new SelectElement(minfantDropDown);
             minfantAdultNb.SelectByIndex(3);
         }
 
         public void ConfirmPassengerNumbers()
         {
-            this.driverContext.Driver.GetElement(doneBtn).Click();
+            this.Driver.GetElement(doneBtn).Click();
         }
 
         public void ClickSearchBtnForFlights()
         {
-            this.driverContext.Driver.GetElement(searchBtn).Click();
+            this.Driver.GetElement(searchBtn).Click();
         }
 
         public void CheckResultsOfSearch()
         {
-            var result = this.driverContext.Driver.GetElement(results).Displayed;
+            var result = this.Driver.GetElement(results).Displayed;
             Assert.AreEqual(true, result);
         }
 
+        public FlightsPage SetOneWayOrRoundTrip(bool isRoundTrip)
+        {
+            if (isRoundTrip)
+            {
+                this.Driver.GetElement(this.roundTripRadiobutton).Click();
+            }
+            else
+            {
+                this.Driver.GetElement(this.oneWayRadiobutton).Click();
+            }
+            return this;
+        }
     }
 }
