@@ -86,15 +86,52 @@ this.ScenarioInitialize(scenarioInfo);
 #line 7
  testRunner.When("I click on hotels tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 8
- testRunner.And(string.Format("I set attributes for {0}", cityname), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And(string.Format("I set attributes for {0}", cityname), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 9
- testRunner.And(string.Format("I choose date for {0} and {1}", checkinDate, checkoutDate), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And(string.Format("I choose date for {0} and {1}", checkinDate, checkoutDate), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 10
- testRunner.And("I add child to travellers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("I add child to travellers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 11
- testRunner.And("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 12
  testRunner.Then("I can see at least one result of my search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Verify hotels search and book one")]
+        [NUnit.Framework.TestCaseAttribute("Zabol", "12/02/2019", "28/02/2019", "Julia", "Kowalska", "jkowal@wp.pl", "jkowal@wp.pl", "+48520963410", "Wroclaw", "Poland", null)]
+        [NUnit.Framework.TestCaseAttribute("Kazan", "27/07/2019", "05/09/2019", "Mateusz", "Nowak", "mnowak@gmail.com", "mnowak@gmail.com", "+49574123698", "Berlin", "Germany", null)]
+        [NUnit.Framework.TestCaseAttribute("Malaysia", "01/12/2019", "10/01/2020", "Antek", "Blaszczykowski", "ablasz@o2.pl", "ablasz@o2.pl", "+49856954000", "Rome", "Italy", null)]
+        public virtual void VerifyHotelsSearchAndBookOne(string cityname, string checkinDate, string checkoutDate, string fname, string lname, string email, string emailc, string mobile, string address, string country, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify hotels search and book one", null, exampleTags);
+#line 20
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 21
+ testRunner.Given("Default page is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 22
+ testRunner.When("I click on hotels tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 23
+  testRunner.And(string.Format("I set attributes for {0}", cityname), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 24
+  testRunner.And(string.Format("I choose date for {0} and {1}", checkinDate, checkoutDate), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 25
+  testRunner.And("I add child to travellers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 26
+  testRunner.And("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 27
+  testRunner.And("I can see at least one result of my search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 28
+  testRunner.And("I choose first hotel from the list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 29
+  testRunner.And("I book selected hotel", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 30
+  testRunner.And(string.Format("I set form {0}, {1}, {2}, {3}, {4}, {5}, {6} values", fname, lname, email, emailc, mobile, address, country), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 31
+  testRunner.And("I click on confirmation this booking button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

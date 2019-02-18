@@ -12,6 +12,7 @@ Scenario Outline: Verify flights page and search results
 	And I confirm my choice
 	And I click search button
 	Then I see results of my search
+
 Examples: 
 | fromCity | toCity | date       |
 | Elfas    | Sel    | 2019-03-01 |

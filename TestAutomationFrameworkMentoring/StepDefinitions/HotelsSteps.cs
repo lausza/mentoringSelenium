@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Objectivity.Test.Automation.Common;
 using TechTalk.SpecFlow;
 using TestAutomationFrameworkMentoring.PageObjects;
@@ -13,58 +10,67 @@ namespace TestAutomationFrameworkMentoring.StepDefinitions
     {
         private readonly DriverContext driverContext;
         private readonly ScenarioContext scenarioContext;
-
+        private HotelsPage page;
         public HotelsSteps(ScenarioContext scenarioContext)
         {
             if (scenarioContext == null)
             {
                 throw new ArgumentNullException("scenarioContext");
             }
-
             this.scenarioContext = scenarioContext;
             this.driverContext = this.scenarioContext.Get<DriverContext>("DriverContext");
+            this.page = new HotelsPage(driverContext);
         }
-
         [When(@"I click on hotels tab")]
         public void WhenIClickOnHotelsTab()
         {
-            var homePage = new HotelsPage(this.driverContext);
-            homePage.ClickOnHotelsBtn();
+            this.page.ClickOnHotelsBtn();
         }
-
         [When(@"I set attributes for (.*)")]
         public void WhenISetAttributesForCityName(string cityName)
         {
-            var homePage = new HotelsPage(this.driverContext);
-            homePage.SearchByValues(cityName);
+            this.page.SearchByValues(cityName);
         }
-
         [When(@"I choose date for (.*) and (.*)")]
         public void WhenIChooseDateForAnd(string checkin, string checkout)
         {
-            var homePage = new HotelsPage(this.driverContext);
-            homePage.SetDates(checkin,checkout);
+            this.page.SetDates(checkin, checkout);
         }
         [When(@"I add child to travellers")]
         public void WhenIAddChildToTravellers()
         {
-            var homePage = new HotelsPage(this.driverContext);
-            homePage.SetTravellers();
+            this.page.SetTravellers();
         }
-
-
         [When(@"I click on search button")]
         public void WhenIClickOnSearchButton()
         {
-            var homePage = new HotelsPage(this.driverContext);
-            homePage.ClickOnSearchBtn();
+            this.page.ClickOnSearchBtn();
         }
-
         [Then(@"I can see at least one result of my search")]
+        [When(@"I can see at least one result of my search")]
         public void ThenICanSeeAtLeastOneResultOfMySearch()
         {
-            var homePage = new HotelsPage(this.driverContext);
-            homePage.CheckResultTable();
+            this.page.CheckResultTable();
+        }
+        [When(@"I choose first hotel from the list")]
+        public void WhenIChooseFirstFromTheList()
+        {
+            this.page.ClickOnDetailsBtn();
+        }
+        [When(@"I book selected hotel")]
+        public void WhenIBookSelectedHotel()
+        {
+            this.page.BookSelectedHotel();
+        }
+        [When(@"I set form (.*),(.*), (.*), (.*), (.*), (.*), (.*) values")]
+        public void WhenISetFormWithValus(string name, string lname, string email, string emailc, string mobile, string address, string country)
+        {
+            this.page.SetFormFields(name, lname, email, emailc, mobile, address, country);
+        }
+        [When(@"I click on confirmation this booking button")]
+        public void WhenIClickOnConfirmationThisBookingButton()
+        {
+           this.page.ConfirmHotelBooking();
         }
     }
 }

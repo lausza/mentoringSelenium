@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Objectivity.Test.Automation.Common;
 using TechTalk.SpecFlow;
 using TestAutomationFrameworkMentoring.PageObjects;
@@ -13,7 +10,7 @@ namespace TestAutomationFrameworkMentoring.StepDefinitions
     {
         private readonly DriverContext driverContext;
         private readonly ScenarioContext scenarioContext;
-
+        private FlightsPage page;
         public FlightsSteps(ScenarioContext scenarioContext)
         {
             if (scenarioContext == null)
@@ -22,62 +19,53 @@ namespace TestAutomationFrameworkMentoring.StepDefinitions
             }
             this.scenarioContext = scenarioContext;
             this.driverContext = this.scenarioContext.Get<DriverContext>("DriverContext");
+            this.page = new FlightsPage(driverContext);
         }
         [When(@"I click on flights tab")]
         public void WhenIClickOnFlightsTab()
         {
-            var flightsPage = new FlightsPage(this.driverContext);
-            flightsPage.ClickOnFlightsBtn();
+           this.page.ClickOnFlightsBtn();
         }
 
         [When(@"I enter (.*) value")]
         public void WhenIEnterValue(string fromCity)
         {
-            var flightsPage = new FlightsPage(this.driverContext);
-            flightsPage.SetFromCity(fromCity);
+            this.page.SetFromCity(fromCity);
         }
 
         [When(@"I enter location (.*)")]
         public void WhenIEnterLocationSel(string toCity)
         {
-            var flightsPage = new FlightsPage(this.driverContext);
-            flightsPage.SetToCity(toCity);
+            this.page.SetToCity(toCity);
         }
 
         [When(@"I enter (.*) of departure")]
         public void WhenIEnterOfDeparture(string date)
         {
-            var flightsPage = new FlightsPage(this.driverContext);
-            flightsPage.EnterDepartDate(date);
+            this.page.EnterDepartDate(date);
         }
 
         [When(@"I set passenger numbers")]
         public void WhenISetPassengerNumbers()
         {
-            var flightsPage = new FlightsPage(this.driverContext);
-            flightsPage.SetTotalNumberOfPassengers();
+           this.page.SetTotalNumberOfPassengers();
         }
 
         [When(@"I confirm my choice")]
         public void WhenIConfirmMyChoice()
         {
-            var flightsPage = new FlightsPage(this.driverContext);
-            flightsPage.ConfirmPassengerNumbers();
+           this.page.ConfirmPassengerNumbers();
         }
 
         [When(@"I click search button")]
         public void WhenIClickSearchButton()
         {
-            var flightsPage = new FlightsPage(this.driverContext);
-            flightsPage.ClickSearchBtnForFlights();
+            this.page.ClickSearchBtnForFlights();
         }
         [Then(@"I see results of my search")]
         public void ThenISeeResultsOfMySearch()
         {
-            var flightsPage = new FlightsPage(this.driverContext);
+            this.page.CheckResultsOfSearch();
         }
-
-
-
     }
 }
