@@ -29,6 +29,7 @@ Scenario Outline: Verify hotels search and book one
 		And I book selected hotel
 		And I set form <fname>, <lname>, <email>, <emailc>, <mobile>, <address>, <country> values
 		And I click on confirmation this booking button
+	Then I get invoice document
 
 Examples:
 | cityname | checkinDate | checkoutDate | fname   | lname          | email            | emailc           | mobile       | address | country |

@@ -29,7 +29,10 @@ namespace TestAutomationFrameworkMentoring.PageObjects
                 "form[name=\"flightmanualSearch\"] button[type=\"submit\"]"),
             results = new ElementLocator(Locator.CssSelector, "table#load_data tr:nth-child(1) > td");
         private readonly ElementLocator
-            flightsBtn = new ElementLocator(Locator.XPath, "//a[@title=\"Flights\"]");
+            flightsBtn = new ElementLocator(Locator.XPath, "//a[@title=\"Flights\"]"),
+            filterNonStopCheckbox = new ElementLocator(Locator.CssSelector, "div#body-section div.panel-body > div:nth-child(1) > label"),
+            filterRadioBtn = new ElementLocator(Locator.XPath, "//div[@class='pure-checkbox']//div[@class='iradio_square-grey']"),
+            cabinClassDropdown = new ElementLocator(Locator.XPath, "//select[@name='cabinclass']");
 
         public FlightsPage(DriverContext driverContext) : base(driverContext)
         {
@@ -84,5 +87,16 @@ namespace TestAutomationFrameworkMentoring.PageObjects
             var result = this.Driver.GetElement(results).Displayed;
             Assert.AreEqual(true, result);
         }
+
+        public void SelectFilters()
+        {
+            this.Driver.GetElement(filterNonStopCheckbox).Click();
+            this.Driver.GetElement(filterRadioBtn).Click();
+
+            IWebElement cabinclass = Driver.GetElement(cabinClassDropdown);
+            SelectElement cabinClassElement = new SelectElement(cabinclass);
+            cabinClassElement.SelectByText("Business");
+        }
+
     }
 }

@@ -86,6 +86,7 @@
             this.DriverContext.Start();
             this.scenarioContext["DriverContext"] = this.DriverContext;
             this.DriverContext.Driver.Manage().Window.Maximize();
+            this.DriverContext.Driver.Manage().Cookies.DeleteAllCookies();
         }
 
         /// <summary>

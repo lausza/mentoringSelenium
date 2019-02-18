@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using Objectivity.Test.Automation.Common;
 using Objectivity.Test.Automation.Common.Extensions;
 using Objectivity.Test.Automation.Common.Types;
 using Objectivity.Test.Automation.Tests.PageObjects;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 
 namespace TestAutomationFrameworkMentoring.PageObjects
 {
@@ -38,7 +38,9 @@ namespace TestAutomationFrameworkMentoring.PageObjects
             addressField = new ElementLocator(Locator.Name, "address"),
             countryDropdown = new ElementLocator(Locator.Id, "s2id_autogen1"),
             valueCountry = new ElementLocator(Locator.XPath, "//div[@class='select2-result-label'][contains(text(), '{0}')]"),
-            confirmThisBookingBtn = new ElementLocator( Locator.XPath, "//button[@class='btn btn-success btn-lg btn-block completebook']");
+            confirmThisBookingBtn = new ElementLocator( Locator.XPath, "//button[@class='btn btn-success btn-lg btn-block completebook']"),
+            invoiceTable = new ElementLocator(Locator.Id, "invoiceTable"),
+            tag = new ElementLocator(Locator.TagName, "tr");
 
         public HotelsPage(DriverContext driverContext) : base(driverContext)
         {
@@ -105,7 +107,19 @@ namespace TestAutomationFrameworkMentoring.PageObjects
         public void ConfirmHotelBooking()
         {
            this.Driver.GetElement(confirmThisBookingBtn).Click();
+        }
 
+        public void GetInvoiceDocument()
+        {
+            var result = this.Driver.GetElement(invoiceTable).Displayed;
+            Assert.AreEqual(true, result);
+
+            IList<IWebElement> allElement = Driver.GetElements(tag.Format(tag));
+            foreach (IWebElement element in allElement)
+            {
+                string cellText = element.Text;
+                Console.WriteLine(cellText);
+            }
         }
     }
 }

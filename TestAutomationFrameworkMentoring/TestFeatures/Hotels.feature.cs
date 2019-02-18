@@ -132,6 +132,8 @@ this.ScenarioInitialize(scenarioInfo);
   testRunner.And(string.Format("I set form {0}, {1}, {2}, {3}, {4}, {5}, {6} values", fname, lname, email, emailc, mobile, address, country), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 31
   testRunner.And("I click on confirmation this booking button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 32
+ testRunner.Then("I get invoice document", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -72,5 +72,12 @@ namespace TestAutomationFrameworkMentoring.StepDefinitions
         {
            this.page.ConfirmHotelBooking();
         }
+
+        [Then(@"I get invoice document")]
+        public void ThenIGetInvoiceDocument()
+        {
+            this.page.GetInvoiceDocument();
+        }
+
     }
 }

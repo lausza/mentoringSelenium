@@ -63,9 +63,16 @@ namespace TestAutomationFrameworkMentoring.StepDefinitions
             this.page.ClickSearchBtnForFlights();
         }
         [Then(@"I see results of my search")]
+        [When(@"I see results of my search")]
         public void ThenISeeResultsOfMySearch()
         {
             this.page.CheckResultsOfSearch();
         }
+        [When(@"I set filter values")]
+        public void WhenISetFilterValues()
+        {
+            this.page.SelectFilters();
+        }
+
     }
 }
