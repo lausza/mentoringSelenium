@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using NUnit.Framework;
 using Objectivity.Test.Automation.Common;
 using Objectivity.Test.Automation.Common.Extensions;
@@ -100,7 +101,7 @@ namespace TestAutomationFrameworkMentoring.PageObjects
 
         public void ClickSearchBtnForFlights()
         {
-            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(1000);
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(5000);
             this.Driver.GetElement(searchBtn).Click();
         }
 
@@ -142,6 +143,7 @@ namespace TestAutomationFrameworkMentoring.PageObjects
             this.Driver.GetElement(applyCouponBtn).Click();
 
             Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(1000);
+            Thread.Sleep(3000);
             var alertText = this.Driver.SwitchTo().Alert().Text;
             Console.WriteLine(alertText);
             Assert.IsTrue(alertText.Contains("Invalid"));
