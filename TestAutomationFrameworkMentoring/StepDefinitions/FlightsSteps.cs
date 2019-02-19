@@ -97,5 +97,11 @@ namespace TestAutomationFrameworkMentoring.StepDefinitions
             this.page.CheckReservationStatus();
         }
 
+        [When(@"I try enter coupon (.*)")]
+        public void WhenITryEnterCouponDd(string couponNb)
+        {
+            this.page.EnetrCouponNumber(couponNb);
+        }
+
     }
 }

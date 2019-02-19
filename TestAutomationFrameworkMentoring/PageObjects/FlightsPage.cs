@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Objectivity.Test.Automation.Common;
 using Objectivity.Test.Automation.Common.Extensions;
 using Objectivity.Test.Automation.Common.Types;
@@ -25,8 +26,8 @@ namespace TestAutomationFrameworkMentoring.PageObjects
             childField = new ElementLocator(Locator.XPath, "//select[@name=\"mchildren\"]"),
             minfantField = new ElementLocator(Locator.XPath, "//select[@name=\"minfant\"]"),
             doneBtn = new ElementLocator(Locator.Id, "sumManualPassenger"),
-            searchBtn = new ElementLocator(Locator.CssSelector,
-                "form[name=\"flightmanualSearch\"] button[type=\"submit\"]"),
+            searchBtn = new ElementLocator(Locator.XPath,
+                "//button[@class='btn-primary btn btn-lg btn-block pfb0']"),
             results = new ElementLocator(Locator.CssSelector, "table#load_data tr:nth-child(1) > td"),
             flightsBtn = new ElementLocator(Locator.XPath, "//a[@title=\"Flights\"]"),
             filterNonStopCheckbox = new ElementLocator(Locator.CssSelector,
@@ -40,15 +41,19 @@ namespace TestAutomationFrameworkMentoring.PageObjects
             email = new ElementLocator(Locator.Name, "email"),
             emailc = new ElementLocator(Locator.Name, "confirmemail"),
             bookBtn = new ElementLocator(Locator.CssSelector, "div#body-section button[type=\"submit\"]"),
-            invoiceTable = new ElementLocator(Locator.Id, "invoiceTable");
+            invoiceTable = new ElementLocator(Locator.Id, "invoiceTable"),
+            couponNbField = new ElementLocator(Locator.XPath, "//input[@class='RTL form-control coupon']"),
+            applyCouponBtn = new ElementLocator(Locator.XPath, "//div[@class='col-md-6 go-left']");
 
         public FlightsPage(DriverContext driverContext) : base(driverContext)
         {
         }
 
-        public void ClickOnFlightsBtn()
+        public FlightsPage ClickOnFlightsBtn()
         {
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(1000);
             this.Driver.GetElement(flightsBtn).Click();
+            return this;
         }
 
         public void SetFromCity(string fromCity)
@@ -95,6 +100,7 @@ namespace TestAutomationFrameworkMentoring.PageObjects
 
         public void ClickSearchBtnForFlights()
         {
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(1000);
             this.Driver.GetElement(searchBtn).Click();
         }
 
@@ -127,8 +133,24 @@ namespace TestAutomationFrameworkMentoring.PageObjects
             this.Driver.GetElement(emailc).SendKeys(e_mailc);
         }
 
+        public void EnetrCouponNumber(string couponNb)
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
+            js.ExecuteScript("window.scrollBy(0,1000)");
+
+            this.Driver.GetElement(couponNbField).SendKeys(couponNb);
+            this.Driver.GetElement(applyCouponBtn).Click();
+
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(1000);
+            var alertText = this.Driver.SwitchTo().Alert().Text;
+            Console.WriteLine(alertText);
+            Assert.IsTrue(alertText.Contains("Invalid"));
+            this.Driver.SwitchTo().Alert().Accept();
+        }
+
         public void BookReservation()
         {
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(1000);
             this.Driver.GetElement(bookBtn).Click();
         }
 
@@ -136,6 +158,8 @@ namespace TestAutomationFrameworkMentoring.PageObjects
         {
             var result = this.Driver.GetElement(invoiceTable).Text;
             Assert.IsTrue(result != null && result.Contains("UNPAID"));
+
+
         }
     }
 }

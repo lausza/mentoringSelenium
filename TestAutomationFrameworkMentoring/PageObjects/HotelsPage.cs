@@ -26,7 +26,7 @@ namespace TestAutomationFrameworkMentoring.PageObjects
             firtValueFromtable = new ElementLocator(Locator.CssSelector,
                 "div#body-section tr:nth-child(1) > td > div.col-md-6.col-xs-4.go-right > div > h4 > a > b"),        
             detailsBtn = new ElementLocator(Locator.CssSelector,
-                "div#body-section tr:nth-child(1) > td > div.col-md-3.col-xs-4.col-sm-4.go-left.pull-right.price_tab > a > button"),
+                "div#body-section tr:nth-child(8) > td > div.col-md-3.col-xs-4.col-sm-4.go-left.pull-right.price_tab > a > button"),
             priceCheckbox = new ElementLocator(Locator.XPath, "//div[@class='col-md-2 go-right pull-right']//div[@class='control__indicator']"),
             bookNowBtn = new ElementLocator(Locator.XPath,
                 "//button[@class=\"book_button btn btn-md btn-success btn-block btn-block chk mob-fs10 loader\"]"),
@@ -40,7 +40,9 @@ namespace TestAutomationFrameworkMentoring.PageObjects
             valueCountry = new ElementLocator(Locator.XPath, "//div[@class='select2-result-label'][contains(text(), '{0}')]"),
             confirmThisBookingBtn = new ElementLocator( Locator.XPath, "//button[@class='btn btn-success btn-lg btn-block completebook']"),
             invoiceTable = new ElementLocator(Locator.Id, "invoiceTable"),
-            tag = new ElementLocator(Locator.TagName, "tr");
+            tag = new ElementLocator(Locator.TagName, "tr"),
+            noResults= new ElementLocator( Locator.XPath, "//h4[@class='alert alert-info']"),
+            wishListBtn = new ElementLocator( Locator.XPath, "//span[@class='wishtext']");
 
         public HotelsPage(DriverContext driverContext) : base(driverContext)
         {
@@ -48,8 +50,9 @@ namespace TestAutomationFrameworkMentoring.PageObjects
         }
         public HotelsPage ClickOnHotelsBtn()
         {
-           this.Driver.GetElement(hotelsBtn).Click();
-           return this;
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(1000);
+            this.Driver.GetElement(hotelsBtn).Click();
+            return this;
         }
         public void SearchByValues(string cityName)
         {
@@ -82,6 +85,9 @@ namespace TestAutomationFrameworkMentoring.PageObjects
         }
         public void ClickOnDetailsBtn()
         {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
+            js.ExecuteScript("window.scrollBy(0,1000)");
+
             this.Driver.GetElement(detailsBtn).Click();
         }
         public void BookSelectedHotel()
@@ -92,6 +98,14 @@ namespace TestAutomationFrameworkMentoring.PageObjects
             this.Driver.GetElement(priceCheckbox).Click();
             this.Driver.GetElement(bookNowBtn).Click();
         }
+
+        public bool CheckIfFieldsAreDisplayed()
+        {
+            var waitForElement =
+                this.Driver.GetElement(this.fnameField, BaseConfiguration.ShortTimeout, e => e.Displayed);
+            return waitForElement.Displayed;
+        }
+
         public void SetFormFields(string fname, string lname, string email, string emailc, string mobile, string address, string country)
         {
             this.Driver.GetElement(fnameField).SendKeys(fname);

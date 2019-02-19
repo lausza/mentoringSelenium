@@ -65,7 +65,13 @@ namespace TestAutomationFrameworkMentoring.StepDefinitions
         [When(@"I set form (.*),(.*), (.*), (.*), (.*), (.*), (.*) values")]
         public void WhenISetFormWithValus(string name, string lname, string email, string emailc, string mobile, string address, string country)
         {
-            this.page.SetFormFields(name, lname, email, emailc, mobile, address, country);
+            //this.page.CheckIfFieldsAreDisplayed();
+
+            if (this.page.CheckIfFieldsAreDisplayed() == true)
+            {
+                this.page.SetFormFields(name, lname, email, emailc, mobile, address, country);
+            }
+            else throw new ArgumentNullException("Fileds is not displayed");
         }
         [When(@"I click on confirmation this booking button")]
         public void WhenIClickOnConfirmationThisBookingButton()

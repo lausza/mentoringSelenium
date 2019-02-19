@@ -16,10 +16,22 @@ namespace TestAutomationFrameworkMentoring.StepDefinitions
         }
         public HomePage OpenHomePage()
         {
-            var url = BaseConfiguration.GetUrlValue;
-            this.Driver.NavigateTo(new Uri(url));
-            Logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
-            return this;
+            try
+            {
+                var url = BaseConfiguration.GetUrlValue;
+                this.Driver.NavigateTo(new Uri(url));
+                Logger.Info(CultureInfo.CurrentCulture, "Opening page {0}", url);
+                return this;
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                throw;
+            }
+
+           
+
+
         }
     }
 }
