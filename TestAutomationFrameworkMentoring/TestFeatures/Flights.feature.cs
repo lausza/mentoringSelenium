@@ -105,10 +105,10 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Verify flights page and make some custom search")]
-        [NUnit.Framework.TestCaseAttribute("Bro", "Sto", "2019-03-01", null)]
-        [NUnit.Framework.TestCaseAttribute("Sel", "Bir", "2019-04-10", null)]
-        [NUnit.Framework.TestCaseAttribute("Akr", "Tra", "2019-07-30", null)]
-        public virtual void VerifyFlightsPageAndMakeSomeCustomSearch(string fromCity, string toCity, string date, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("Bro", "Sto", "2019-03-01", "Joasia", "Nowakowska", "jkowalska@wp.pl", "jkowalska@wp.pl", null)]
+        [NUnit.Framework.TestCaseAttribute("Sel", "Bir", "2019-04-10", "Maciej", "Kowalski", "maciej@op.pl", "maciej@op.pl", null)]
+        [NUnit.Framework.TestCaseAttribute("Akr", "Tra", "2019-07-30", "Pawel", "Sobieski", "psobieski@o2.pl", "psobieski@o2.pl", null)]
+        public virtual void VerifyFlightsPageAndMakeSomeCustomSearch(string fromCity, string toCity, string date, string fname, string lname, string email, string emailc, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify flights page and make some custom search", null, exampleTags);
 #line 22
@@ -134,6 +134,14 @@ this.ScenarioInitialize(scenarioInfo);
   testRunner.And("I see results of my search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 32
   testRunner.And("I set filter values", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 33
+  testRunner.And("I can book the flight", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 34
+  testRunner.And(string.Format("I enter personal details to finish booking {0}, {1}, {2}, {3}", fname, lname, email, emailc), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 35
+  testRunner.And("I book my reservation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 36
+ testRunner.Then("I can see summary of reservation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

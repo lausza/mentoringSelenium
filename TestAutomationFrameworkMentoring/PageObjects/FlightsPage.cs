@@ -27,37 +27,50 @@ namespace TestAutomationFrameworkMentoring.PageObjects
             doneBtn = new ElementLocator(Locator.Id, "sumManualPassenger"),
             searchBtn = new ElementLocator(Locator.CssSelector,
                 "form[name=\"flightmanualSearch\"] button[type=\"submit\"]"),
-            results = new ElementLocator(Locator.CssSelector, "table#load_data tr:nth-child(1) > td");
-        private readonly ElementLocator
+            results = new ElementLocator(Locator.CssSelector, "table#load_data tr:nth-child(1) > td"),
             flightsBtn = new ElementLocator(Locator.XPath, "//a[@title=\"Flights\"]"),
-            filterNonStopCheckbox = new ElementLocator(Locator.CssSelector, "div#body-section div.panel-body > div:nth-child(1) > label"),
-            filterRadioBtn = new ElementLocator(Locator.XPath, "//div[@class='pure-checkbox']//div[@class='iradio_square-grey']"),
-            cabinClassDropdown = new ElementLocator(Locator.XPath, "//select[@name='cabinclass']");
+            filterNonStopCheckbox = new ElementLocator(Locator.CssSelector,
+                "div#body-section div.panel-body > div:nth-child(1) > label"),
+            filterRadioBtn = new ElementLocator(Locator.XPath,
+                "//div[@class='pure-checkbox']//div[@class='iradio_square-grey']"),
+            cabinClassDropdown = new ElementLocator(Locator.XPath, "//select[@name='cabinclass']"),
+            bookNowBtn = new ElementLocator(Locator.Id, "bookbtn"),
+            fname = new ElementLocator(Locator.Name, "firstname"),
+            lname = new ElementLocator(Locator.Name, "lastname"),
+            email = new ElementLocator(Locator.Name, "email"),
+            emailc = new ElementLocator(Locator.Name, "confirmemail"),
+            bookBtn = new ElementLocator(Locator.CssSelector, "div#body-section button[type=\"submit\"]"),
+            invoiceTable = new ElementLocator(Locator.Id, "invoiceTable");
 
         public FlightsPage(DriverContext driverContext) : base(driverContext)
         {
         }
+
         public void ClickOnFlightsBtn()
         {
             this.Driver.GetElement(flightsBtn).Click();
         }
+
         public void SetFromCity(string fromCity)
         {
             this.Driver.GetElement(fromField).Click();
             this.Driver.GetElement(cityFromName).SendKeys(fromCity);
             this.Driver.GetElement(firstFromCity).Click();
         }
+
         public void SetToCity(string toCity)
         {
             this.Driver.GetElement(toField).Click();
             this.Driver.GetElement(cityToName).SendKeys(toCity);
             this.Driver.GetElement(firstToCity).Click();
         }
+
         public void EnterDepartDate(string date)
         {
             this.Driver.GetElement(departDate).SendKeys(date);
             this.Driver.GetElement(departDate).Click();
         }
+
         public void SetTotalNumberOfPassengers()
         {
             this.Driver.GetElement(passengersField).Click();
@@ -74,14 +87,17 @@ namespace TestAutomationFrameworkMentoring.PageObjects
             SelectElement minfantAdultNb = new SelectElement(minfantDropDown);
             minfantAdultNb.SelectByIndex(3);
         }
+
         public void ConfirmPassengerNumbers()
         {
             this.Driver.GetElement(doneBtn).Click();
         }
+
         public void ClickSearchBtnForFlights()
         {
             this.Driver.GetElement(searchBtn).Click();
         }
+
         public void CheckResultsOfSearch()
         {
             var result = this.Driver.GetElement(results).Displayed;
@@ -98,5 +114,28 @@ namespace TestAutomationFrameworkMentoring.PageObjects
             cabinClassElement.SelectByText("Business");
         }
 
+        public void BookFlight()
+        {
+            this.Driver.GetElement(bookNowBtn).Click();
+        }
+
+        public void EnterDetails(string f_name, string l_name, string e_mail, string e_mailc)
+        {
+            this.Driver.GetElement(fname).SendKeys(f_name);
+            this.Driver.GetElement(lname).SendKeys(l_name);
+            this.Driver.GetElement(email).SendKeys(e_mail);
+            this.Driver.GetElement(emailc).SendKeys(e_mailc);
+        }
+
+        public void BookReservation()
+        {
+            this.Driver.GetElement(bookBtn).Click();
+        }
+
+        public void CheckReservationStatus()
+        {
+            var result = this.Driver.GetElement(invoiceTable).Text;
+            Assert.IsTrue(result != null && result.Contains("UNPAID"));
+        }
     }
 }

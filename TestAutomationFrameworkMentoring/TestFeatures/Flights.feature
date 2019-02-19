@@ -30,10 +30,14 @@ Scenario Outline: Verify flights page and make some custom search
 		And I click search button
 		And I see results of my search
 		And I set filter values
+		And I can book the flight
+		And I enter personal details to finish booking <fname>, <lname>, <email>, <emailc>
+		And I book my reservation
+	Then I can see summary of reservation
 
 
 Examples: 
-| fromCity | toCity | date       |
-| Bro      | Sto    | 2019-03-01 |
-| Sel      | Bir    | 2019-04-10 |
-| Akr      | Tra    | 2019-07-30 |
+| fromCity | toCity | date       | fname  | lname      | email           | emailc          |
+| Bro      | Sto    | 2019-03-01 | Joasia | Nowakowska | jkowalska@wp.pl | jkowalska@wp.pl |
+| Sel      | Bir    | 2019-04-10 | Maciej | Kowalski   | maciej@op.pl    | maciej@op.pl    |
+| Akr      | Tra    | 2019-07-30 | Pawel  | Sobieski   | psobieski@o2.pl | psobieski@o2.pl |

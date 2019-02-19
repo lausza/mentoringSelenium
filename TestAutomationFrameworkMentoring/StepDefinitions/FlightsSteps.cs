@@ -74,5 +74,28 @@ namespace TestAutomationFrameworkMentoring.StepDefinitions
             this.page.SelectFilters();
         }
 
+        [When(@"I can book the flight")]
+        public void WhenICanBookTheFlight()
+        {
+            this.page.BookFlight();
+        }
+
+        [When(@"I enter personal details to finish booking (.*), (.*), (.*), (.*)")]
+        public void WhenIEnterPersonalDetailsToFinishBookingJ(string fname, string lname, string email, string emailc)
+        {
+           this.page.EnterDetails(fname, lname, email, emailc);
+        }
+
+        [When(@"I book my reservation")]
+        public void WhenIBookMyReservation()
+        {
+            this.page.BookReservation();
+        }
+        [Then(@"I can see summary of reservation")]
+        public void ThenICanSeeSummaryOfReservation()
+        {
+            this.page.CheckReservationStatus();
+        }
+
     }
 }
