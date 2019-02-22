@@ -79,7 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\Element_extensions.cs" />
-    <Compile Include="Helpers\BlogSearchParameters.cs" />
+    <Compile Include="Helpers\JavaScriptHelper.cs" />
     <Compile Include="PageObjects\BlogPage.cs" />
     <Compile Include="PageObjects\FlightsPage.cs" />
     <Compile Include="StepDefinitions\BlogSteps.cs" />

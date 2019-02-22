@@ -6,6 +6,7 @@ using Objectivity.Test.Automation.Common.Extensions;
 using Objectivity.Test.Automation.Common.Types;
 using Objectivity.Test.Automation.Tests.PageObjects;
 using OpenQA.Selenium;
+using TestAutomationFrameworkMentoring.Helpers;
 
 namespace TestAutomationFrameworkMentoring.PageObjects
 {
@@ -85,15 +86,13 @@ namespace TestAutomationFrameworkMentoring.PageObjects
         }
         public void ClickOnDetailsBtn()
         {
-            IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
-            js.ExecuteScript("window.scrollBy(0,1000)");
+            JavaScriptHelper.JavaScriptScroll(this.Driver);
 
             this.Driver.GetElement(detailsBtn).Click();
         }
         public void BookSelectedHotel()
         {
-            IJavaScriptExecutor js = (IJavaScriptExecutor) Driver;
-            js.ExecuteScript("window.scrollBy(0,1000)");
+            JavaScriptHelper.JavaScriptScroll(this.Driver);
 
             this.Driver.GetElement(priceCheckbox).Click();
             this.Driver.GetElement(bookNowBtn).Click();

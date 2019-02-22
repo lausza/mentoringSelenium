@@ -6,6 +6,7 @@ using Objectivity.Test.Automation.Common.Types;
 using Objectivity.Test.Automation.Tests.PageObjects;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using TestAutomationFrameworkMentoring.Helpers;
 
 namespace TestAutomationFrameworkMentoring.PageObjects
 {
@@ -137,8 +138,8 @@ namespace TestAutomationFrameworkMentoring.PageObjects
 
         public void EnetrCouponNumber(string couponNb)
         {
-            IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
-            js.ExecuteScript("window.scrollBy(0,1000)");
+            
+            JavaScriptHelper.JavaScriptScroll(this.Driver);
 
             this.Driver.GetElement(couponNbField).SendKeys(couponNb);
             this.Driver.GetElement(applyCouponBtn).Click();
@@ -158,9 +159,6 @@ namespace TestAutomationFrameworkMentoring.PageObjects
                 Console.WriteLine(e);
                 throw;
             }
-
-
-            
         }
 
         public void BookReservation()
