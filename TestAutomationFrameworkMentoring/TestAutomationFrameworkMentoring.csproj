@@ -78,8 +78,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\Element_extensions.cs" />
+    <Compile Include="Helpers\BlogSearchParameters.cs" />
+    <Compile Include="PageObjects\BlogPage.cs" />
     <Compile Include="PageObjects\FlightsPage.cs" />
+    <Compile Include="StepDefinitions\BlogSteps.cs" />
     <Compile Include="StepDefinitions\FlightsSteps.cs" />
+    <Compile Include="TestFeatures\Blog.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Blog.feature</DependentUpon>
+    </Compile>
     <Compile Include="TestFeatures\Flights.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -102,6 +111,10 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="TestFeatures\Blog.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Blog.feature.cs</LastGenOutput>
+    </None>
     <None Include="TestFeatures\Flights.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flights.feature.cs</LastGenOutput>
@@ -115,6 +128,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

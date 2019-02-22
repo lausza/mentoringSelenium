@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using NUnit.Framework;
 using Objectivity.Test.Automation.Common;
 using Objectivity.Test.Automation.Common.Extensions;
@@ -49,6 +48,7 @@ namespace TestAutomationFrameworkMentoring.PageObjects
         public FlightsPage(DriverContext driverContext) : base(driverContext)
         {
         }
+        private IWebElement MyAccount { get; set; }
 
         public FlightsPage ClickOnFlightsBtn()
         {
@@ -62,6 +62,7 @@ namespace TestAutomationFrameworkMentoring.PageObjects
             this.Driver.GetElement(fromField).Click();
             this.Driver.GetElement(cityFromName).SendKeys(fromCity);
             this.Driver.GetElement(firstFromCity).Click();
+
         }
 
         public void SetToCity(string toCity)
@@ -142,12 +143,24 @@ namespace TestAutomationFrameworkMentoring.PageObjects
             this.Driver.GetElement(couponNbField).SendKeys(couponNb);
             this.Driver.GetElement(applyCouponBtn).Click();
 
-            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(1000);
-            Thread.Sleep(3000);
-            var alertText = this.Driver.SwitchTo().Alert().Text;
-            Console.WriteLine(alertText);
-            Assert.IsTrue(alertText.Contains("Invalid"));
-            this.Driver.SwitchTo().Alert().Accept();
+            var wait = new WebDriverWait(Driver,TimeSpan.FromMilliseconds(3000));
+            wait.Until(ExpectedConditions.AlertIsPresent());
+
+            try
+            {
+                var alertText = this.Driver.SwitchTo().Alert().Text;
+                Console.WriteLine(alertText);
+                Assert.IsTrue(alertText.Contains("Invalid"));
+                this.Driver.SwitchTo().Alert().Accept();
+            }
+            catch (NoAlertPresentException e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+
+            
         }
 
         public void BookReservation()
@@ -160,8 +173,6 @@ namespace TestAutomationFrameworkMentoring.PageObjects
         {
             var result = this.Driver.GetElement(invoiceTable).Text;
             Assert.IsTrue(result != null && result.Contains("UNPAID"));
-
-
         }
     }
 }
