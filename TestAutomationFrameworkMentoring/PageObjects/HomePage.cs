@@ -28,10 +28,6 @@ namespace TestAutomationFrameworkMentoring.StepDefinitions
                 Console.WriteLine(exception);
                 throw;
             }
-
-           
-
-
         }
     }
 }

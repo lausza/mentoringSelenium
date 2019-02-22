@@ -1,8 +1,7 @@
 ﻿Feature: SpecFlowBlogPage
 	In order to test demo site
 	As a client I will open the page and make some functional tests
-
-
+	
 Scenario Outline: As a client I can open blog page
 	Given Default page is opened
 		And I click on blog link

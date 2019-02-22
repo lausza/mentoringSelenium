@@ -63,7 +63,6 @@ namespace TestAutomationFrameworkMentoring.PageObjects
             this.Driver.GetElement(fromField).Click();
             this.Driver.GetElement(cityFromName).SendKeys(fromCity);
             this.Driver.GetElement(firstFromCity).Click();
-
         }
 
         public void SetToCity(string toCity)

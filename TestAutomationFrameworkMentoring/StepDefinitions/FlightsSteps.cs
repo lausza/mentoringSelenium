@@ -102,6 +102,5 @@ namespace TestAutomationFrameworkMentoring.StepDefinitions
         {
             this.page.EnetrCouponNumber(couponNb);
         }
-
     }
 }

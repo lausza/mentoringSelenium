@@ -47,7 +47,5 @@ namespace TestAutomationFrameworkMentoring.StepDefinitions
         {
             this.page.CheckResultsOnPage();
         }
-
-
     }
 }

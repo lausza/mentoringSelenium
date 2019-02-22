@@ -84,6 +84,5 @@ namespace TestAutomationFrameworkMentoring.StepDefinitions
         {
             this.page.GetInvoiceDocument();
         }
-
     }
 }

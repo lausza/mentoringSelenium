@@ -12,7 +12,7 @@ Scenario Outline: Verify flights page and search results
 		And I confirm my choice
 		And I click search button
 	Then I see results of my search
-
+	
 Examples: 
 | fromCity | toCity | date       |
 | Elfas    | Sel    | 2019-03-01 |
@@ -35,7 +35,6 @@ Scenario Outline: Verify flights page and make some custom search
 		And I try enter coupon <number>
 		And I book my reservation
 	Then I can see summary of reservation
-
 
 Examples: 
 | fromCity | toCity | date       | fname  | lname      | email           | emailc          | number |
