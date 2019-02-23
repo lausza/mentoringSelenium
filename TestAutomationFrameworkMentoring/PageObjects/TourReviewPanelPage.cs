@@ -5,6 +5,7 @@
     using Objectivity.Test.Automation.Common.Extensions;
     using Objectivity.Test.Automation.Common.Types;
     using Objectivity.Test.Automation.Tests.PageObjects;
+    using Extensions;
 
     public class TourReviewPanelPage : ProjectPageBase
     {
@@ -25,27 +26,30 @@
 
         public void SubmitReview()
         {
-            this.Driver.GetElement(this.submitButton).Click();
+            this.Driver.Click(this.submitButton);
         }
 
         public TourReviewPanelPage EnterName(string name)
         {
+            this.Driver.SendKeys(this.nameInput, name);
             return this;
         }
 
         public TourReviewPanelPage EnterEmail(string emailAddress)
         {
+            this.Driver.SendKeys(this.emailInput, emailAddress);
             return this;
         }
 
         public TourReviewPanelPage EnterDescription(string reviewDescription)
         {
+            this.Driver.SendKeys(this.descriptionInput, reviewDescription);
             return this;
         }
 
-        public TourReviewPanelPage CloseReviewTourPanel(string name)
+        public void CloseReviewTourPanel()
         {
-            return this;
+           this.Driver.Click(this.closePanelButton);           
         }
     }
 }

@@ -78,6 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\DriverExtensions.cs" />
     <Compile Include="Helpers\FlightSearchParameters.cs" />
     <Compile Include="PageObjects\FlightsPage.cs" />
     <Compile Include="PageObjects\TourReviewPanelPage.cs" />

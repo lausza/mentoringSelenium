@@ -1,9 +1,9 @@
 ﻿namespace TestAutomationFrameworkMentoring.StepDefinitions
 {
     using TechTalk.SpecFlow;
-    using FluentAssertions;
     using Objectivity.Test.Automation.Common;
-    using TestAutomationFrameworkMentoring.PageObjects;
+    using PageObjects;
+    using FluentAssertions;
 
     [Binding]
     public class TourReviewPanelSteps
